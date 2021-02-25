@@ -2,7 +2,7 @@ import functools
 
 from flask import(
     Blueprint,flash,g,render_template,
-    request,url_for,session
+    request,url_for,session,redirect
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from todo.db import get_db
@@ -17,7 +17,7 @@ def register():
         db, c = get_db()
         error = None
         c.execute(
-            'select id from user where username == %s'
+            'select id from user where username = %s', (username,)
         )
         if not username:
             error = 'Username es requerido'
@@ -37,3 +37,28 @@ def register():
         flash(error)
     
     return render_template('auth/register.html')
+
+@bp.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db , c = get_db()
+        error = None
+        c.execute(
+            'select * from user where username = %s',(username,)
+        )
+        user = c.fetchone()
+        if user is None:
+            error = 'Usuario y/o Contraseña inválida'
+        elif not check_password_hash(user['password'],password):
+            error = 'Usuario y/o Contraseña inválida'
+        
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('index'))
+        
+        flash(error)
+    
+    return render_template('auth/login.html')
