@@ -6,7 +6,7 @@
     <ul>
         {% if g.user %}
         <li><span>{{ g.user['username'] }}</span></li>
-        <li><a href="{{ urlfor('auth.logout') }}">Cerrar Sesion</a></li>
+        <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesion</a></li>
         {% else %}
         <li><a href="{{ url_for('auth.register') }}">Registrarse</a></li>
         <li><a href="{{ url_for('auth.login') }}">Iniciar Sesion</a></li>
