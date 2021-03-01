@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block content %}
-    <form action="POST">
-        <label for="description">Descrpcion</label>
-        <input type="text" name="description" id="description" required>
+    <form method="post">
+        <label for="description">Descripcion</label>
+        <input name="description" id="description" required>
         <input type="submit" value="Guardar">
     </form>
 {% endblock %}
