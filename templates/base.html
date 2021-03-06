@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <title>{% block title %}{% endblock %} - Todo List</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
+<nav id="title_menu">
     <h1>Todo List</h1>
     <ul>
         {% if g.user %}
         <li><span>{{ g.user['username'] }}</span></li>
         <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesion</a></li>
         {% else %}
-        <li><a href="{{ url_for('auth.register') }}">Registrarse</a></li>
         <li><a href="{{ url_for('auth.login') }}">Iniciar Sesion</a></li>
+        <li><a href="{{ url_for('auth.register') }}">Registrarse</a></li>
         {% endif %}
     </ul>
 </nav>
@@ -22,3 +22,57 @@
     {% endfor %}
     {% block content %}{% endblock %}
 </section>
+
+<style>
+    h1,label{
+        color: white;
+        text-align: center;
+    }
+    #title_menu{
+        margin: 2%;
+        padding-bottom: 5px;
+        border-radius: 10px;
+        text-align: center;
+        background-color: #20639b;
+        color: white;
+    }
+    body{
+        background-color: #173f5f;
+    }
+    #title_menu ul{
+        list-style-type: none;
+        text-align: center;
+    }
+    #title_menu li{
+        display: inline;
+        text-align: center;
+        margin: 0 10px 0 0;
+    }
+    #title_menu li a {
+        color: white;
+        padding: 2px 7px 2px 7px;
+        background-color: #3caea3;
+        border: 1px solid #3caea3;
+        text-decoration: none;
+    }
+    #title_menu li a:hover{
+        background-color: #22756d;
+        color: #ffffff;
+    }
+    form{
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #20639b;
+        padding-bottom: 5px;
+        border-radius: 10px;
+    }
+    form input{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
