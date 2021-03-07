@@ -2,9 +2,11 @@
 
 {% block header %}
 <h1>{% block title %}{% endblock %}</h1>
+<h1>
     {% if g.user %}
     <a href="{{ url_for('todo.create') }}" class="action">Nuevo</a>
     {% endif %}
+</h1>
 {% endblock %}
 
 {% block content %}
